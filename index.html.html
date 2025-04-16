@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎂 Happy Birthday, My Love</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(to right, #ffaad4, #ffe0f7);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: gradientShift 5s infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background: linear-gradient(to right, #ffaad4, #ffe0f7); }
+      50% { background: linear-gradient(to right, #ff8cb4, #f1c6e0); }
+      100% { background: linear-gradient(to right, #ffaad4, #ffe0f7); }
+    }
+
+    .page {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .active {
+      display: flex;
+      animation: fadeIn 1s forwards;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(15px);
+      padding: 40px;
+      border-radius: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 450px;
+      animation: popIn 0.7s ease;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #ff69b4;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin: 10px 0;
+      transition: transform 0.3s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    img:hover {
+      transform: scale(1.03);
+    }
+
+    button {
+      padding: 10px 25px;
+      background-color: #ff6bcb;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 10px 5px 0;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff4db8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hearts span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      opacity: 0.7;
+      animation: float 6s linear infinite;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(-45deg); opacity: 0; }
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      opacity: 0.7;
+      animation: fall 5s linear infinite;
+      z-index: 10;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    .music-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.4);
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      color: #555;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 99;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts -->
+  <div class="hearts" id="hearts">
+    <!-- JS will add hearts -->
+  </div>
+
+  <!-- Page 1 -->
+  <div class="page active" id="page1">
+    <div class="card">
+      <h1>Happy Birthday, My Love! 🎂</h1>
+      <p>Wishing you a lifetime of happiness, laughter, and love 💖</p>
+      <button onclick="nextPage()">Next ➡️</button>
+    </div>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="page" id="page2">
+    <div class="card">
+      <h1>💌 Just for You</h1>
+      <p>You're my sunshine, and I am forever grateful to have you in my life 🌟</p>
+      <p>Every moment with you feels like magic ✨</p>
+      <button onclick="prevPage()">⬅️ Back</button>
+      <button onclick="nextPage()">Next ➡️</button>
+    </div>
+  </div>
+
+  <!-- Page 3: Photos -->
+  <div class="page" id="page3">
+    <div class="card">
+      <h1>📸 Our Beautiful Memories</h1>
+      <img src="https://via.placeholder.com/300x200.png?text=Photo+1" alt="Photo 1">
+      <img src="https://via.placeholder.com/300x200.png?text=Photo+2" alt="Photo 2">
+      <button onclick="prevPage()">⬅️ Back</button>
+      <button onclick="nextPage()">Next ➡️</button>
+    </div>
+  </div>
+
+  <!-- Page 4: Surprise -->
+  <div class="page" id="page4">
+    <div class="card">
+      <h1>🎉 Surprise Time!</h1>
+      <p>You are my heart’s deepest desire. Let’s celebrate YOU! 🌸</p>
+      <button onclick="launchConfetti()">🎊 Launch Confetti</button>
+      <button onclick="prevPage()">⬅️ Back</button>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop autoplay>
+    <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mp3">
+  </audio>
+  <button class="music-toggle" onclick="toggleMusic()">🎵 Music</button>
+
+  <script>
+    let currentPage = 1;
+
+    function showPage(n) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + n).classList.add('active');
+      currentPage = n;
+    }
+
+    function nextPage() {
+      if (currentPage < 4) showPage(currentPage + 1);
+    }
+
+    function prevPage() {
+      if (currentPage > 1) showPage(currentPage - 1);
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById("bgMusic");
+      if (music.paused) music.play();
+      else music.pause();
+    }
+
+    function launchConfetti() {
+      for (let i = 0; i < 150; i++) {
+        let confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        confetti.style.top = "-20px";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 6000);
+      }
+    }
+
+    // Floating hearts
+    function createHearts() {
+      const container = document.getElementById("hearts");
+      for (let i = 0; i < 20; i++) {
+        const span = document.createElement("span");
+        span.style.left = Math.random() * 100 + "vw";
+        span.style.animationDuration = (Math.random() * 5 + 4) + "s";
+        span.style.background = "pink";
+        container.appendChild(span);
+      }
+    }
+
+    createHearts();
+  </script>
+
+</body>
+</html>
